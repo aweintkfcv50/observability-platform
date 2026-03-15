@@ -7,8 +7,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    # 添加清理缓存步骤
-    - name: Clear cache and dependencies
+    # 添加清理缓存步骤（可选）
+    - name: Clear cache
       run: |
         echo "Cleaning up cached dependencies..."
         sudo rm -rf ~/.npm ~/.cache/pip
@@ -21,5 +21,6 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd ~/observability-platform
-        ./deploy.sh
+          ./deploy.sh
+
 
