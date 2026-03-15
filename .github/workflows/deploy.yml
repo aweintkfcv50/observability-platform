@@ -5,7 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4  # 从 v3 升级到 v4
+      uses: actions/checkout@v4
+    
+    # 添加清理缓存步骤
+    - name: Clear cache and dependencies
+      run: |
+        echo "Cleaning up cached dependencies..."
+        sudo rm -rf ~/.npm ~/.cache/pip
+    
     - name: Deploy to Server
       uses: appleboy/ssh-action@v1.0.0
       with:
@@ -14,5 +21,5 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd ~/observability-platform
-          ./deploy.sh
+        ./deploy.sh
 
